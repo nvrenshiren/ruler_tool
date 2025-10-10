@@ -1,0 +1,48 @@
+{
+  "name": "ruler_tool",
+  "version": "1.0.2",
+  "description": "",
+  "bin": {
+    "rulerTool": "dist/index.js"
+  },
+  "scripts": {
+    "build": "rm -rf dist & node ./scripts/build.mjs",
+    "ts": "tsx",
+    "prepublishOnly": "npm version patch"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "homepage": "https://github.com/nvrenshiren/ruler_tool.git",
+  "author": "86727767@qq.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "20.5.9",
+    "commander": "^13.1.0",
+    "esbuild": "^0.25.0",
+    "fs-extra": "^11.2.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.4.3"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "dependencies": {
+    "@gltf-transform/core": "^4.2.1",
+    "@gltf-transform/extensions": "^4.2.1",
+    "@types/bluebird": "^3.5.42",
+    "@types/draco3d": "^1.4.10",
+    "@types/object-hash": "^3.0.6",
+    "@types/three": "^0.180.0",
+    "@webgpu/types": "^0.1.65",
+    "bluebird": "^3.7.2",
+    "cesium": "^1.131.0",
+    "draco3d": "^1.5.7",
+    "jpeg-js": "^0.4.4",
+    "ktx-parse": "^1.1.0",
+    "mime": "^3.0.0",
+    "object-hash": "^3.0.0",
+    "pngjs": "^7.0.0",
+    "sharp": "^0.34.4",
+    "three": "^0.180.0"
+  }
+}
