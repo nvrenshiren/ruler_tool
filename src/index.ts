@@ -6,6 +6,7 @@ import obj from "./obj"
 import compressDracoMeshes from "./gltf/compressDracoMeshes"
 import processGltf from "./gltf/processGltf"
 import ktx2 from "./ktx"
+import convert from "./convert"
 
 const program = new Command("rulerTools")
 program.version(pkg.version)
@@ -103,6 +104,14 @@ const ktxCommand = program
   .option("-m, --mipmap", "生成mipmap", false)
   .action(async options => {
     await ktx2(options)
+  })
+const convertCommand = program
+  .command("convert")
+  .description("模型互相转换")
+  .option("-i, --input <path>", "源模型文件的输入路径")
+  .option("-t, --type <type>", "转换的格式,obj,ply,glb2,collada,fbx,stl,gltf2,默认gltf2", "gltf2")
+  .action(async options => {
+    await convert(options)
   })
 
 program.parse(process.argv)

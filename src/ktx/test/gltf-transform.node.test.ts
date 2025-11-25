@@ -2,16 +2,31 @@ import { Document } from "@gltf-transform/core"
 import { ktx2 } from "../gltf-transform"
 import { expect, test, describe } from "vitest"
 import { readFile } from "fs/promises"
-import sharp from "sharp"
-
+import { Jimp } from "jimp"
 async function imageDecoder(buffer: Uint8Array) {
-  const image = sharp(buffer)
-  const metadata = await image.metadata()
-  const { width, height } = metadata
-  const rawBuffer = await image.ensureAlpha().raw().toBuffer()
-  const data = new Uint8Array(rawBuffer)
+  const image = await Jimp.read(Buffer.from(buffer))
 
-  return { width: width!, height: height!, data }
+  // 确保有 Alpha 通道
+  const { width, height } = image.bitmap
+
+  // 转换为 RGBA 格式
+  for (let i = 0; i < image.bitmap.data.length; i += 4) {
+    // 如果没有 Alpha 通道，设置为不透明
+    if (image.bitmap.data.length % 4 !== 0) {
+      image.bitmap.data[i + 3] = 255
+    }
+  }
+
+  const data = new Uint8Array(image.bitmap.data)
+
+  // 创建 imageData 对象
+  const imageData = {
+    width,
+    height,
+    data
+  }
+
+  return imageData
 }
 
 describe("ktx2 transform node", () => {
